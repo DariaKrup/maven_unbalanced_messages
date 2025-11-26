@@ -54,9 +54,6 @@ project {
             bucketName = "chubatovawest1"
             bucketPrefix = "maven-s3"
             forceVirtualHostAddressing = true
-            awsEnvironment = default {
-                awsRegionName = "eu-west-1"
-            }
             connectionId = "MavenUnbalancedMessages_AmazonWebServicesAws"
         }
         activeStorage {
