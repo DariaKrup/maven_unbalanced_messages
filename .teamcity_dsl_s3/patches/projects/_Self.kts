@@ -47,7 +47,7 @@ changeProject(DslContext.projectId) {
             }
         }
         feature2.apply {
-            bucketName = "tc-dkrupkina-acceleration"
+            bucketName = "chubatovawest1"
             awsEnvironment = default {
                 awsRegionName = "eu-west-1"
             }
