@@ -53,8 +53,6 @@ project {
             bucketName = "tc-dkrupkina-limited-access"
             bucketPrefix = "maven-s3"
             forceVirtualHostAddressing = true
-            awsEnvironment = default {
-            }
             connectionId = "MavenUnbalancedMessages_AmazonWebServicesAws"
         }
         activeStorage {
