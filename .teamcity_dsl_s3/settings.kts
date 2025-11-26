@@ -38,14 +38,14 @@ project {
         awsConnection {
             id = "MavenUnbalancedMessages_AmazonWebServicesAws"
             name = "Amazon Web Services (AWS)"
-            regionName = "eu-south-1"
+            regionName = "eu-west-3"
             credentialsType = static {
                 accessKeyId = "AKIA5JH2VERVI62P5XDY"
                 secretAccessKey = "credentialsJSON:eb053465-ece1-444c-af16-96f1ad63ccff"
             }
             allowInSubProjects = true
             allowInBuilds = true
-            stsEndpoint = "https://sts.eu-south-1.amazonaws.com"
+            stsEndpoint = "https://sts.eu-west-3.amazonaws.com"
             param("awsSessionDuration", "")
         }
         s3Storage {
