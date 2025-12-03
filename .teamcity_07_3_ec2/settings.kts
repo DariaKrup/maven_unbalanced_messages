@@ -63,13 +63,12 @@ project {
         amazonEC2CloudImage {
             id = "PROJECT_EXT_30"
             profileId = "amazon-1"
-            agentPoolId = "-2"
             name = "AMI"
             vpcSubnetId = "subnet-043178c302cabfe37"
             keyPairName = "daria.krupkina"
             instanceType = "t2.medium"
             securityGroups = listOf("sg-072d8bfa0626ea2a6")
-            source = Source("ami-0817025aa39c203c6")
+            source = Source("ami-07908fe7a17542f6b")
         }
         amazonEC2CloudProfile {
             id = "amazon-1"
