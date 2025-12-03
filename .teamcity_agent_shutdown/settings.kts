@@ -56,7 +56,7 @@ project {
             instanceType = "t2.medium"
             securityGroups = listOf("sg-072d8bfa0626ea2a6")
             maxInstancesCount = 3
-            source = Source("ami-07908fe7a17542f6b")
+            source = Source("ami-0817025aa39c203c6")
         }
         amazonEC2CloudProfile {
             id = "amazon-61"
