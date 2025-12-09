@@ -8,6 +8,7 @@ import jetbrains.buildServer.configs.kotlin.projectFeatures.awsConnection
 
 object Project : Project({
 
+    val ec2InstanceId = "i-0c609ac124457a9ac"
     features {
         awsConnection {
             id = "AwsEc2Profile_AmazonWebServicesAws1"
@@ -26,12 +27,12 @@ object Project : Project({
             id = "PROJECT_EXT_760"
             profileId = "amazon-58"
             agentPoolId = "-2"
-            name = "Windows Instance"
+            name = "Windows-$ec2InstanceId"
             vpcSubnetId = "subnet-0c23f411b0800b216"
             keyPairName = "daria.krupkina"
             instanceType = "t2.medium"
             securityGroups = listOf("sg-072d8bfa0626ea2a6")
-            source = Source("i-0c609ac124457a9ac")
+            source = Source(ec2InstanceId)
         }
         amazonEC2CloudProfile {
             id = "amazon-58"
