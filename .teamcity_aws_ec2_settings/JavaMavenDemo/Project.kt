@@ -100,6 +100,18 @@ object Project : Project({
             source = Source("i-0aa8f308327fd1bc1")
         }
         amazonEC2CloudImage {
+            id = "PROJECT_EXT_356"
+            profileId = "amazon-21"
+            agentPoolId = "253fhufifhu"
+            imagePriority = 3
+            name = "Instance Image (new)"
+            vpcSubnetId = "subnet-0c23f411b0800b216"
+            keyPairName = "daria.krupkina"
+            instanceType = "t2.medium"
+            securityGroups = listOf("sg-072d8bfa0626ea2a6")
+            source = Source("i-0aa8f308327fd1bc1")
+        }
+        amazonEC2CloudImage {
             id = "PROJECT_EXT_36"
             profileId = "amazon-22"
             imagePriority = 1
