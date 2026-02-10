@@ -38,5 +38,44 @@ changeProject(RelativeId("JavaMavenDemo")) {
             securityGroups = listOf("sg-072d8bfa0626ea2a6")
             source = Source("i-0aa8f308327fd1bc1")
         }
+        val feature2 = find<AmazonEC2CloudImage> {
+            amazonEC2CloudImage {
+                id = "PROJECT_EXT_NEW_AM"
+                profileId = "amazon-20"
+                agentPoolId = "4333sjnwjnjwenjfwenrjf1"
+                imagePriority = 10
+                name = "Ubuntu AMI (incorrect pool from the start)"
+                vpcSubnetId = "subnet-0ee5ddb298ed3d189"
+                iamProfile = "dkrupkinaEc2Role"
+                keyPairName = "daria.krupkina"
+                instanceType = "t2.small"
+                securityGroups = listOf("sg-072d8bfa0626ea2a6")
+                useSpotInstances = true
+                spotInstanceBidPrice = 0.02
+                instanceTags = mapOf(
+                    "Owner" to "daria.krupkina@jetbrains.com"
+                )
+                maxInstancesCount = 1
+                source = Source("ami-0817025aa39c203c6")
+            }
+        }
+        feature2.apply {
+            profileId = "amazon-20"
+            agentPoolId = "-2"
+            imagePriority = 10
+            name = "Ubuntu AMI (incorrect pool from the start)"
+            vpcSubnetId = "subnet-0ee5ddb298ed3d189"
+            iamProfile = "dkrupkinaEc2Role"
+            keyPairName = "daria.krupkina"
+            instanceType = "t2.small"
+            securityGroups = listOf("sg-072d8bfa0626ea2a6")
+            useSpotInstances = true
+            spotInstanceBidPrice = 0.02
+            instanceTags = mapOf(
+                "Owner" to "daria.krupkina@jetbrains.com"
+            )
+            maxInstancesCount = 1
+            source = Source("ami-0817025aa39c203c6")
+        }
     }
 }
