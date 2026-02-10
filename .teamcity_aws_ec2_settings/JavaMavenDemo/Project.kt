@@ -101,7 +101,7 @@ object Project : Project({
         }
         amazonEC2CloudImage {
             id = "PROJECT_EXT_356"
-            profileId = "amazon-21"
+            profileId = "amazon-20"
             agentPoolId = "253fhufifhu"
             imagePriority = 3
             name = "Instance Image (new)"
