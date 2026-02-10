@@ -90,7 +90,7 @@ object Project : Project({
         amazonEC2CloudImage {
             id = "PROJECT_EXT_35"
             profileId = "amazon-21"
-            agentPoolId = "-2"
+            agentPoolId = "253"
             imagePriority = 3
             name = "Instance Image"
             vpcSubnetId = "subnet-0c23f411b0800b216"
