@@ -90,7 +90,7 @@ object Project : Project({
         amazonEC2CloudImage {
             id = "PROJECT_EXT_NEW_AM"
             profileId = "amazon-20"
-            agentPoolId = "4333sjnwjnjwenjfwenrjf1"
+            agentPoolId = "433391"
             imagePriority = 10
             name = "Ubuntu AMI (incorrect pool from the start)"
             vpcSubnetId = "subnet-0ee5ddb298ed3d189"
