@@ -2,8 +2,10 @@ package patches.projects
 
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.AmazonEC2CloudImage
+import jetbrains.buildServer.configs.kotlin.AmazonEC2CloudProfile
 import jetbrains.buildServer.configs.kotlin.Project
 import jetbrains.buildServer.configs.kotlin.amazonEC2CloudImage
+import jetbrains.buildServer.configs.kotlin.amazonEC2CloudProfile
 import jetbrains.buildServer.configs.kotlin.ui.*
 
 /*
@@ -42,7 +44,7 @@ changeProject(RelativeId("JavaMavenDemo")) {
             amazonEC2CloudImage {
                 id = "PROJECT_EXT_NEW_AM"
                 profileId = "amazon-20"
-                agentPoolId = "4333sjnwjnjwenjfwenrjf1"
+                agentPoolId = "433391"
                 imagePriority = 10
                 name = "Ubuntu AMI (incorrect pool from the start)"
                 vpcSubnetId = "subnet-0ee5ddb298ed3d189"
@@ -76,6 +78,26 @@ changeProject(RelativeId("JavaMavenDemo")) {
             )
             maxInstancesCount = 1
             source = Source("ami-0817025aa39c203c6")
+        }
+        val feature3 = find<AmazonEC2CloudProfile> {
+            amazonEC2CloudProfile {
+                id = "amazon-22"
+                enabled = false
+                name = "AWS EC2: keys"
+                description = "AWS EC2 Cloud Profile with access keys authentication."
+                terminateIdleMinutes = 0
+                terminateTotalWorkMinutes = 30
+                region = AmazonEC2CloudProfile.Regions.EU_WEST_DUBLIN
+                awsConnectionId = "AwsEc2Profile_JavaMavenDemo_AmazonWebServicesAwsKeys"
+            }
+        }
+        feature3.apply {
+            name = "AWS EC2: keys"
+            description = "AWS EC2 Cloud Profile with access keys authentication."
+            terminateIdleMinutes = 0
+            terminateTotalWorkMinutes = 30
+            region = AmazonEC2CloudProfile.Regions.EU_WEST_DUBLIN
+            awsConnectionId = "AwsEc2Profile_JavaMavenDemo_AmazonWebServicesAwsKeys"
         }
     }
 }
