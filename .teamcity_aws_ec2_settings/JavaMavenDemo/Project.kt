@@ -88,6 +88,25 @@ object Project : Project({
             source = Source("ami-0817025aa39c203c6")
         }
         amazonEC2CloudImage {
+            id = "PROJECT_EXT_AWS"
+            profileId = "amazon-20"
+            agentPoolId = "403"
+            imagePriority = 10
+            name = "Ubuntu AMI (in onther pool)"
+            vpcSubnetId = "subnet-0ee5ddb298ed3d189"
+            iamProfile = "dkrupkinaEc2Role"
+            keyPairName = "daria.krupkina"
+            instanceType = "t2.small"
+            securityGroups = listOf("sg-072d8bfa0626ea2a6")
+            useSpotInstances = true
+            spotInstanceBidPrice = 0.02
+            instanceTags = mapOf(
+                "Owner" to "daria.krupkina@jetbrains.com"
+            )
+            maxInstancesCount = 1
+            source = Source("ami-0817025aa39c203c6")
+        }
+        amazonEC2CloudImage {
             id = "PROJECT_EXT_NEW_AM"
             profileId = "amazon-20"
             agentPoolId = "-88"
