@@ -37,6 +37,12 @@ public class PersonTest {
     }
 
     @Test
+    public void TestFails() {
+        System.out.println("Compare 3 and 5");
+        assertEquals(3, 5);
+    }
+
+    @Test
     public void TestBlock() {
 
         System.out.println("##teamcity[blockOpened name='<Login>']");
