@@ -42,6 +42,12 @@ public class PersonTest {
         assertEquals(3, 5);
     }
 
+     @Test
+    public void TestFailsWords() {
+        System.out.println("Compare wows");
+        assertEquals("wow", "woww");
+    }
+
     @Test
     public void TestFailsWithMinus() {
         System.out.println("Compare -3 and -5");
