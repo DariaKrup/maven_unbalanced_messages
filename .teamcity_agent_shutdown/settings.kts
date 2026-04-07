@@ -33,6 +33,10 @@ project {
 
     buildType(BuildMavenSleep)
 
+    params {
+        param("a", "a")
+    }
+
     features {
         awsConnection {
             id = "AWS_SubprojectWithDSL_AmazonWebServicesAwsLocal"
