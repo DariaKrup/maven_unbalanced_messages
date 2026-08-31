@@ -12,4 +12,10 @@ public class RerunTest {
         MockNeat random = MockNeat.threadLocal();
         assertTrue(random.bools().probability(20.00).val());
     }
+
+    @Test
+    public void RandomlyPassTestSecond() {
+        MockNeat random = MockNeat.threadLocal();
+        assertTrue(random.bools().probability(90.00).val());
+    }
 }
