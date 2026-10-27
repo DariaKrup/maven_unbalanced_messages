@@ -2,20 +2,27 @@
 <!--
   TW-104016 Path B verification fixture (server-side Maven metadata / Maven tab).
 
-  Put this pom.xml in a VCS root, attach it to a build configuration with a
-  Maven build step (pomLocation = pom.xml), then open the build type's Maven tab
-  (/viewType.html?buildTypeId=<id>&tab=maven). The server resolves project
-  metadata through the embedder (maven-embedder-api, bumped to 1.4.7.1 by the
-  fix) — this path does NOT go through ValidatingLocalRepositoryManager, so this
-  fixture exercises the library-level guard instead.
+  Surface: the build CONFIGURATION's "Maven" tab (tab id `maven`), "Reread Maven
+  project data" -> server calls embedder.readProjectWithModules(pom).
 
-  The SNAPSHOT dependency forces a maven-metadata.xml lookup against the
-  traversal-id repository. The artifact does not need to exist.
+  KEY: readProjectWithModules only reaches the repository-id -> path sink when the
+  effective-model build is FORCED to resolve something remotely. A plain
+  <dependency> is merely listed from the model and never resolved through the repo
+  (that is why the earlier SNAPSHOT-dependency fixture rendered with no error and
+  proved nothing). A PARENT POM, by contrast, MUST be resolved to build the model,
+  so the embedder computes getPathForRemoteArtifact(parent, <probe repo>, ...) and
+  the traversal id enters the path.
 
-  Observable on a FIXED server: resolution is refused/contained and NOTHING is
-  created at the traversal target /tmp/tc-traversal-probe-B. (The library may
-  not throw the same message as Path A; the absence of an out-of-root write is
-  the result that matters here.)
+  The parent below does not exist; resolving it will fail AFTER the repo path is
+  computed. That is fine — the verdict is on the filesystem, not the UI:
+
+    FIXED  server: the bumped maven-embedder-api (1.4.7.1) contains/rejects the id;
+                   NOTHING is written outside the server's local repo.
+    VULN   server: a resolver-status.properties / maven-metadata file is written at
+                   the '..' target OUTSIDE the server local repo (as on the agent run).
+
+  The '..' is a harmless /tmp probe; the guard keys on the presence of '..'.
+  FILL IN nothing — this pom is standalone (no TeamCity allowlist on this path).
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -27,6 +34,13 @@
   <version>1.0</version>
   <packaging>jar</packaging>
 
+  <!-- Forces a remote resolve during readProjectWithModules -> reaches the repo-id sink. -->
+  <parent>
+    <groupId>tw104016.nonexistent</groupId>
+    <artifactId>trigger-parent</artifactId>
+    <version>1.0</version>
+  </parent>
+
   <repositories>
     <repository>
       <id>tw104016probe/../../../../../../../../../../tmp/tc-traversal-probe-B</id>
@@ -35,12 +49,4 @@
       <snapshots><enabled>true</enabled></snapshots>
     </repository>
   </repositories>
-
-  <dependencies>
-    <dependency>
-      <groupId>tw104016.nonexistent</groupId>
-      <artifactId>trigger-metadata</artifactId>
-      <version>99.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
 </project>
