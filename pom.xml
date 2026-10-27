@@ -1,107 +1,46 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>mvn2-spring-openjpa</groupId>
-	<artifactId>mvn2-spring-openjpa</artifactId>
-	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>mvn2-spring-open</name>
-	
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.andreinc</groupId>
-			<artifactId>mockneat</artifactId>
-			<version>0.4.8</version>
-		</dependency>
-	</dependencies>
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TW-104016 Path B verification fixture (server-side Maven metadata / Maven tab).
 
-	<build>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources
-				</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<testResources>
-			<testResource>
-				<directory>${project.basedir}/src/test/resources
-				</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
-		
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.8</version>
-				<executions>
-					<execution>
-						<id>default-deploy</id>
-						<phase>deploy</phase>
-						<goals>
-						   <goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-				
-				<configuration>
-					<serverId>nexus</serverId>
-					<nexusUrl>http://nexus-test.labs.intellij.net:8081/repository/maven-snapshots/</nexusUrl>
-					<skipStaging>true</skipStaging>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
-				<configuration>
-					<rerunFailingTestsCount>5</rerunFailingTestsCount>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  Put this pom.xml in a VCS root, attach it to a build configuration with a
+  Maven build step (pomLocation = pom.xml), then open the build type's Maven tab
+  (/viewType.html?buildTypeId=<id>&tab=maven). The server resolves project
+  metadata through the embedder (maven-embedder-api, bumped to 1.4.7.1 by the
+  fix) — this path does NOT go through ValidatingLocalRepositoryManager, so this
+  fixture exercises the library-level guard instead.
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>nexus</id>
-			<url>http://nexus-test.labs.intellij.net:8081/repository/maven-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
+  The SNAPSHOT dependency forces a maven-metadata.xml lookup against the
+  traversal-id repository. The artifact does not need to exist.
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+  Observable on a FIXED server: resolution is refused/contained and NOTHING is
+  created at the traversal target /tmp/tc-traversal-probe-B. (The library may
+  not throw the same message as Path A; the absence of an out-of-root write is
+  the result that matters here.)
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<repositories>
-		 <repository>
-        		<id>central</id>
-        		<url>https://repo.maven.apache.org/maven2</url>
-   		 </repository>
-	</repositories>
+  <groupId>tw104016.probe</groupId>
+  <artifactId>pathB-build</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
 
+  <repositories>
+    <repository>
+      <id>tw104016probe/../../../../../../../../../../tmp/tc-traversal-probe-B</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>tw104016.nonexistent</groupId>
+      <artifactId>trigger-metadata</artifactId>
+      <version>99.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>
